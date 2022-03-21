@@ -1,0 +1,68 @@
+{
+  "builders": [
+    {
+      "CPUs": "{{user `vm-cpu-num`}}",
+      "RAM": "{{user `vm-mem-size`}}",
+      "RAM_reserve_all": true,
+      "firmware": "bios",
+      "cd_files" : [
+        "./{{user `http_directory`}}/meta-data",
+        "./{{user `http_directory`}}/user-data"],
+      "cd_label": "cidata",
+      "boot_command": [
+        "<esc><esc><esc>",
+        "<enter><wait>",
+        "/casper/vmlinuz ",
+        "initrd=/casper/initrd ",
+        "autoinstall net.ifnames=0 biosdevname=0 ip=dhcp ipv6.disable=1 ",
+        "boot<enter>"
+      ],
+      "boot_wait": "5s",
+      "convert_to_template": "true",
+      "create_snapshot": "false",
+      "datacenter": "{{user `vcenter_datacenter`}}",
+      "datastore": "{{user `vcenter_datastore`}}",
+      "disk_controller_type": "pvscsi",
+      "folder": "{{user `vcenter_folder`}}",
+      "guest_os_type": "{{user `guest_os_type`}}",
+      "cluster": "{{user `cluster`}}",
+      "http_directory": "{{user `http_directory`}}",
+      "insecure_connection": "true",
+      "iso_urls": "{{user `iso_url`}}",
+      "iso_checksum": "{{user `iso_checksum_type`}}:{{user `iso_checksum`}}",
+      "name": "Ubuntu-20.04",
+      "network_adapters": [
+        {
+          "network": "{{user `vcenter_network`}}",
+          "network_card": "vmxnet3"
+        }
+      ],
+      "notes": "Default SSH User: {{user `ssh_username`}}\nDefault SSH Pass: {{user `ssh_password`}}\nBuilt by Packer @ {{isotime \"2006-01-02 03:04\"}}.",
+      "password": "{{user `vcenter_password`}}",
+      "shutdown_command": "echo 'ubuntu'|sudo -S shutdown -P now",
+      "ssh_password": "{{user `ssh_password`}}",
+      "ssh_pty": true,
+      "ssh_timeout": "20m",
+      "ssh_handshake_attempts": "100",
+      "ssh_username": "{{user `ssh_username`}}",
+      "storage": [
+        {
+          "disk_size": "{{user `vm-disk-size`}}",
+          "disk_thin_provisioned": "{{user `thin_provision`}}",
+          "disk_eagerly_scrub": "{{user `disk_eagerly_scrub`}}"
+        }
+      ],
+      "type": "vsphere-iso",
+      "username": "{{user `vcenter_username`}}",
+      "vcenter_server": "{{user `vcenter_server`}}",
+      "vm_name": "{{user `vm_name`}}"
+    }
+  ],
+  "provisioners": [
+    {
+       "type": "shell",
+       "execute_command": "echo 'ubuntu' | {{.Vars}} sudo -S -E bash '{{.Path}}'",
+       "script": "{{user `shell_script`}}"
+     }
+   ]
+}

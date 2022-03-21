@@ -1,0 +1,23 @@
+{
+  "vm_name": "Ubuntu-2004-Template-100GB-Thin",
+  "vcenter_datacenter": "Datacenter",
+  "vcenter_datastore": "Datastore2_NonSSD",
+  "vcenter_host": "",
+  "vcenter_folder": "Templates",
+  "cluster": "Cluster01",
+  "vcenter_network": "VM Network",
+  "guest_os_type": "ubuntu64Guest",
+  "http_directory": "http",
+  "iso_url": "https://releases.ubuntu.com/20.04.3/ubuntu-20.04.3-live-server-amd64.iso",
+  "iso_checksum_type": "sha256",
+  "iso_checksum": "f8e3086f3cea0fb3fefb29937ab5ed9d19e767079633960ccb50e76153effc98",
+  "iso_paths": "[Datastore2_NonSSD] /packer_cache/ubuntu-20.04.3-live-server-amd64.iso",
+  "ssh_username": "ubuntu",
+  "ssh_password": "ubuntu",
+  "vm-cpu-num": "1",
+  "vm-mem-size": "1024",
+  "vm-disk-size": "102400",
+  "thin_provision": true,
+  "disk_eagerly_scrub": false,
+  "shell_script": "setup_ubuntu2004_withDocker.sh"
+}

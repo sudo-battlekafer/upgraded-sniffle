@@ -60,7 +60,7 @@ packer build -force -on-error=ask -var-file variables.json -var-file variables-s
 
 # Troubleshooting
 
-- If packer gets stuck on `Waiting for IP` you may want to check your DHCP server. I'm using a home router and it had too many leases from running packer many times. I had to flush inactive DHCP clients, or reboot the router which is faster.
+- If packer gets stuck on `Waiting for IP` you may want to check your DHCP server. I ran out of leases from running packer so many times. I had to flush inactive DHCP clients.
 
 # Credits
 

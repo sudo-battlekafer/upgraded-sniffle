@@ -61,7 +61,12 @@ packer build -force -on-error=ask -var-file variables.json -var-file variables-s
 
 # Troubleshooting
 
-- If you are running this inside WSL2, you will need to forward a port from Windows to WSL2.  The build.sh has the commands built in already, lines 6 and 17
+- If you are running this inside WSL2, you will need to forward a port from Windows to WSL2.  The build.sh has the commands built in already, lines 6 and 17.  I picked port 4000 arbitrarily, just make sure it matches the ports in your `http_port_min` and `http_port_max` settings.  Setting both to the same port is how you pick a specific port for your http host.
+```yaml
+  http_port_min = 4000
+  http_port_max = 4000 
+```
+
 To create the port forward
 ```sh
 powershell.exe 'netsh interface portproxy add v4tov4 listenport=4000 listenaddress=0.0.0.0 connectport=4000 connectaddress=127.0.0.1'

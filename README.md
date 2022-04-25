@@ -19,7 +19,7 @@ sudo apt-get update && sudo apt-get install packer mkisofs whois
 2. update variables-secrets.json with your information.
 3. create encrypted password for user-data as described [here](#password_encryption)
 4. run the build.sh script (or run the below [commands](#commands) )
-4a. If you are NOT running this inside WSL2, please comment out the powershell.exe lines in build.sh to avoid usless commands/errors.  
+- If you are NOT running this inside WSL2, please comment out the powershell.exe lines in build.sh to avoid usless commands/errors.  
 
 # password_encryption
 

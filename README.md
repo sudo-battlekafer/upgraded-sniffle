@@ -61,6 +61,16 @@ packer build -force -on-error=ask -var-file variables.json -var-file variables-s
 
 # Troubleshooting
 
+- If you are running this inside WSL2, you will need to forward a port from Windows to WSL2.  The build.sh has the commands built in already, lines 6 and 17
+To create the port forward
+```sh
+powershell.exe 'netsh interface portproxy add v4tov4 listenport=4000 listenaddress=0.0.0.0 connectport=4000 connectaddress=127.0.0.1'
+```
+and to delete the prot forward
+```sh
+powershell.exe 'netsh interface portproxy delete v4tov4 listenport=4000 listenaddress=0.0.0.0 connectport=4000 connectaddress=127.0.0.1'
+```
+
 - If packer gets stuck on `Waiting for IP` you may want to check your DHCP server. I ran out of leases from running packer so many times. I had to flush inactive DHCP clients.
 
 # Credits

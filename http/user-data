@@ -32,3 +32,6 @@ autoinstall:
     late-commands:
         - echo 'ubuntu ALL=(ALL) NOPASSWD:ALL' > /target/etc/sudoers.d/ubuntu
         - curtin in-target --target=/target -- chmod 440 /etc/sudoers.d/ubuntu
+        - sed -i 's/^#*\(send dhcp-client-identifier\).*$/\1 = hardware;/' /target/etc/dhcp/dhclient.conf
+        - sed -i 's/PasswordAuthentication no/PasswordAuthentication yes/g' /etc/ssh/sshd_config
+        - sudo systemctl restart ssh        
